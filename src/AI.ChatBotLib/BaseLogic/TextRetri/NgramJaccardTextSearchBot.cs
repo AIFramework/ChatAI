@@ -12,6 +12,11 @@ namespace AI.ChatBotLib.BaseLogic.TextRetri
     public class NgramJaccardTextSearchBot : RetriBot<HashSet<string>>
     {
         /// <summary>
+        /// Нормализовать ли на длинну вопроса
+        /// </summary>
+        public bool QNorm { get; set; } = true;
+
+        /// <summary>
         /// Размер N-граммы
         /// </summary>
         public int NGrammSize { get; protected set; } = 2;
@@ -49,7 +54,10 @@ namespace AI.ChatBotLib.BaseLogic.TextRetri
         /// <param name="set2">Текст 2 (множество n-грамм)</param>
         public override double SimFunc(HashSet<string> set1, HashSet<string> set2)
         {
-            return JaccardCoefficient(set1, set2);
+            if (QNorm)
+                return JaccardCoefficientQ(set1, set2);
+            else
+                return JaccardCoefficient(set1, set2);
         }
 
         /// <summary>
@@ -83,6 +91,12 @@ namespace AI.ChatBotLib.BaseLogic.TextRetri
             var intersection = set1.Intersect(set2).Count();
             var union = set1.Union(set2).Count();
             return (double)intersection / union;
+        }
+
+        private double JaccardCoefficientQ(HashSet<string> set1, HashSet<string> set2)
+        {
+            var intersection = set1.Intersect(set2).Count();
+            return (double)intersection / set1.Count;
         }
     }
 
