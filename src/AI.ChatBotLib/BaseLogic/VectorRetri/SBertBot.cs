@@ -15,8 +15,8 @@ namespace AI.ChatBotLib.BaseLogic.VectorRetri
     [Serializable]
     public class SBertBot : RetriBot<Vector>
     {
-        // Загрузка модели Bert
-        BertEmbedder _embedder;
+        // Модель Bert
+        private BertEmbedder _embedder;
 
         /// <summary>
         /// Бот на базе нейросети Bert
