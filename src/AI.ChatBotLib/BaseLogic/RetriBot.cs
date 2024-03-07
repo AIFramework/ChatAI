@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AI.ChatBotLib.BaseLogic.Context;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -84,6 +85,19 @@ namespace AI.ChatBotLib.BaseLogic
             }
 
             return maxQIndex != -1 ? A[maxQIndex] : NoAnswer;
+        }
+
+        /// <summary>
+        /// Поиск ответа на вопрос
+        /// </summary>
+        /// <param name="q">Контекст</param>
+        /// <param name="simTreshold">Порог близости (по умолчанию 0.5)</param>
+        public virtual string GetAnswer(BotContext context, double simTreshold = 0.5) 
+        {
+            var dim = context.GetContextPart(1);
+            string q = dim[0]["text"];
+            return GetAnswer(q, simTreshold);
+
         }
     }
 }

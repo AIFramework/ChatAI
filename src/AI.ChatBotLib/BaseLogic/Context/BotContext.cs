@@ -19,7 +19,7 @@ namespace AI.ChatBotLib.BaseLogic.Context
         /// <summary>
         /// Сообщения (часть диалога)
         /// </summary>
-        public List<Message> Messages { get; set; }
+        public List<Message> Messages { get; set; } = new List<Message>();
  
         /// <summary>
         /// Максимальное число сообщений
