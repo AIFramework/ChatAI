@@ -1,12 +1,11 @@
-﻿using AI.ChatBotLib.BaseLogic.Context;
+﻿using AI.ChatBotLib.Context;
+using AI.ChatBotLib.Utilites;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AI.ChatBotLib.BaseLogic
+namespace AI.ChatBotLib.RetrievalBot.BaseLogic
 {
     /// <summary>
     /// Бот для поиска ответов на базе совпадения слов
@@ -17,18 +16,16 @@ namespace AI.ChatBotLib.BaseLogic
         /// <summary>
         /// Когда ответ не найден
         /// </summary>
-        public string NoAnswer { get; set; }
-        = "Нет ответа";
-
+        public QASample NoAnswer { get; set; }
+        = DefaultSamples.NoAnswerRus;
         /// <summary>
         /// Массив вопросов
         /// </summary>
-        protected T[] Q { get; set; }
+        protected List<T> Question { get; set; }
         /// <summary>
-        /// Массив ответов
+        /// Массив список ворос-ответ
         /// </summary>
-        protected string[] A { get; set; }
-
+        public List<QASample> DataQA { get; set; }
         /// <summary>
         /// Метод для опредления сходства текстов
         /// </summary>
@@ -36,7 +33,6 @@ namespace AI.ChatBotLib.BaseLogic
         /// <param name="text2">Текст 2</param>
         /// <returns></returns>
         public abstract double SimFunc(T text1, T text2);
-
         /// <summary>
         /// Преобразование текста в новое представление
         /// для поиска
@@ -44,39 +40,43 @@ namespace AI.ChatBotLib.BaseLogic
         /// <param name="text">Текст</param>
         /// <returns></returns>
         public abstract T TextTransform(string text);
-
         /// <summary>
         /// Загрузка вопрос ответ из файла
         /// </summary>
         /// <param name="path">Путь до файла</param>
-        public void LoadTxt(string path)
+        public void LoadData(string path)
         {
-            string[] lines = File.ReadAllLines(path);
-            A = new string[lines.Length / 2];
-            Q = new T[lines.Length / 2];
-
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (i % 2 == 0)
-                    Q[i / 2] = TextTransform(lines[i]);
-                else A[i / 2] = lines[i];
-            }
+            var data = QAManager.LoadData(path);
+            LoadSamples(data);
         }
-
         /// <summary>
-        /// Поиск ответа на вопрос
+        /// Загрузка вопрос ответ из файла
+        /// </summary>
+        /// <param name="path">Путь до файла</param>
+        public void LoadSamples(IEnumerable<QASample> data)
+        {
+            Question = new List<T>();
+            foreach (QASample sample in data)
+                Question.Add(TextTransform(sample.Question));
+
+            var qa = new QASample[Question.Count];
+            Array.Copy(data.ToArray(), qa, Question.Count);
+            DataQA = qa.ToList();
+        }
+        /// <summary>
+        /// Поиск индекса ответа на вопрос
         /// </summary>
         /// <param name="q">Вопрос</param>
         /// <param name="simTreshold">Порог близости (по умолчанию 0.5)</param>
-        public virtual string GetAnswer(string q, double simTreshold = 0.5)
+        public virtual int GetAnswerIndex(string q, double simTreshold = 0.5)
         {
             T qFeatures = TextTransform(q);
             double maxValue = double.MinValue;
             int maxQIndex = -1;
 
-            for (int i = 0; i < Q.Length; i++)
+            for (int i = 0; i < Question.Count; i++)
             {
-                double s = SimFunc(qFeatures, Q[i]);
+                double s = SimFunc(qFeatures, Question[i]);
                 if (maxValue < s && s >= simTreshold)
                 {
                     maxQIndex = i;
@@ -84,20 +84,28 @@ namespace AI.ChatBotLib.BaseLogic
                 }
             }
 
-            return maxQIndex != -1 ? A[maxQIndex] : NoAnswer;
+            return maxQIndex;
         }
-
         /// <summary>
         /// Поиск ответа на вопрос
         /// </summary>
-        /// <param name="q">Контекст</param>
+        /// <param name="q">Вопрос</param>
         /// <param name="simTreshold">Порог близости (по умолчанию 0.5)</param>
-        public virtual string GetAnswer(BotContext context, double simTreshold = 0.5) 
+        public virtual QASample GetAnswer(string q, double simTreshold = 0.5)
+        {
+            int maxQIndex = GetAnswerIndex(q, simTreshold);
+            return maxQIndex != -1 ? DataQA[maxQIndex] : NoAnswer;
+        }
+        /// <summary>
+        /// Поиск ответа на вопрос
+        /// </summary>
+        /// <param name="context">Контекст</param>
+        /// <param name="simTreshold">Порог близости (по умолчанию 0.5)</param>
+        public virtual QASample GetAnswer(BotContext context, double simTreshold = 0.5) 
         {
             var dim = context.GetContextPart(1);
             string q = dim[0]["text"];
             return GetAnswer(q, simTreshold);
-
         }
     }
 }

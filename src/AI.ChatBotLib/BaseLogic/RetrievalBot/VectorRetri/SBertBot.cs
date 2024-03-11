@@ -6,9 +6,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace AI.ChatBotLib.BaseLogic.VectorRetri
+namespace AI.ChatBotLib.RetrievalBot.BaseLogic.VectorRetri
 {
-
     /// <summary>
     /// Бот на базе нейросети Bert
     /// </summary>
@@ -30,7 +29,7 @@ namespace AI.ChatBotLib.BaseLogic.VectorRetri
             LinearLayerLoader linearLayer = LinearLayerLoader.LoadFromBinary($@"{pathSbert}\1_Linear\model.aifr");
             _embedder.V2VBlocks.Add(linearLayer);
 
-            LoadTxt(pathQA);
+            LoadData(pathQA);
         }
 
         /// <summary>

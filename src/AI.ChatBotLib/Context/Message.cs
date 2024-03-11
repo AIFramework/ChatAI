@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace AI.ChatBotLib.BaseLogic.Context
+namespace AI.ChatBotLib.Context
 {
     /// <summary>
     /// Сообщение
     /// </summary>
     [Serializable]
-    public class Message 
+    public class Message
     {
         /// <summary>
         /// Роль
@@ -31,6 +31,6 @@ namespace AI.ChatBotLib.BaseLogic.Context
         /// </summary>
         /// <param name="role">Роль (user/bot)</param>
         /// <param name="text">Текст сообщения</param>
-        public Message(string role, string text) {  Role = role; Text = text; }
+        public Message(string role, string text) { Role = role; Text = text; }
     }
 }

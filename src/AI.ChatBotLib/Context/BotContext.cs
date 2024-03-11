@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AI.ChatBotLib.BaseLogic.Context
+namespace AI.ChatBotLib.Context
 {
     /// <summary>
     /// Часть диалога с ботом
@@ -15,12 +15,12 @@ namespace AI.ChatBotLib.BaseLogic.Context
         /// Абсолютный номер сообщения
         /// </summary>
         private int currentIndex;
-         
+
         /// <summary>
         /// Сообщения (часть диалога)
         /// </summary>
         public List<Message> Messages { get; set; } = new List<Message>();
- 
+
         /// <summary>
         /// Максимальное число сообщений
         /// </summary>
@@ -79,7 +79,7 @@ namespace AI.ChatBotLib.BaseLogic.Context
                     { "role", Messages[i].Role },
                     { "text", Messages[i].Text }
                 });
-                
+
             }
 
             return mess;
@@ -100,7 +100,7 @@ namespace AI.ChatBotLib.BaseLogic.Context
             Messages.Add(new Message(role, text));
         }
 
-       
+
 
     }
 }

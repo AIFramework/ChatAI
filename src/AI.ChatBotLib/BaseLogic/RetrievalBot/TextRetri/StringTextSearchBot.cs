@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AI.ChatBotLib.BaseLogic.TextRetri
+namespace AI.ChatBotLib.RetrievalBot.BaseLogic.TextRetri
 {
     /// <summary>
     /// Простой бот на базе полнотекстового поиска
@@ -18,7 +18,7 @@ namespace AI.ChatBotLib.BaseLogic.TextRetri
         /// <param name="path">Путь до файла с вопросами и ответами</param>
         public StringTextSearchBot(string path)
         {
-            LoadTxt(path);
+            LoadData(path);
         }
 
         /// <summary>
