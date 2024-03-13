@@ -10,6 +10,12 @@ namespace AI.ChatBotLib.Utilites
     public class QASample
     {
         /// <summary>
+        /// Идентификатор QA
+        /// </summary>
+        [JsonPropertyName("id")]
+        public int ID { get; set; }
+
+        /// <summary>
         /// Вопрос
         /// </summary>
         [JsonPropertyName("question")]
@@ -24,8 +30,8 @@ namespace AI.ChatBotLib.Utilites
         /// <summary>
         /// Число "лайков"
         /// </summary>
-        [JsonPropertyName("likes")]
-        public double CountPositive { get; set; } = 0;
+        [JsonPropertyName("reward")]
+        public double Reward { get; set; } = 0;
 
         /// <summary>
         /// Число оценок
@@ -34,22 +40,10 @@ namespace AI.ChatBotLib.Utilites
         public int Count { get; set; } = 0;
 
         /// <summary>
-        /// Число "дизлайков"
-        /// </summary>
-        [JsonPropertyName("dislikes")]
-        public double CountNegative { get; set; } = 0;
-
-        /// <summary>
         /// Оценка
         /// </summary>
         [JsonIgnore]
-        public double Score => (CountPositive - CountNegative) / (CountNegative + CountPositive + double.Epsilon);
-
-        /// <summary>
-        /// Средняя оценка
-        /// </summary>
-        [JsonIgnore]
-        public double MeanScore => (CountPositive - CountNegative) / (Count + double.Epsilon);
+        public double Score => Reward / (Count + double.Epsilon);
 
         /// <summary>
         /// Элемент QA

@@ -7,6 +7,8 @@ Console.Title = "[Chat Bot]";
 var searchBot = new NgramJaccardTextSearchBot("data.json");
 BotContext context = new BotContext();
 
+//QAManager.SaveToJson("data.json", searchBot.DataQA);
+
 while (true)
 {
     Console.WriteLine();

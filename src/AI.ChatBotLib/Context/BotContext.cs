@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Text.Json;
 using System.Collections.Generic;
-using System.Text;
+using System.Text.Json.Serialization;
 
 namespace AI.ChatBotLib.Context
 {
@@ -14,17 +13,26 @@ namespace AI.ChatBotLib.Context
         /// <summary>
         /// Абсолютный номер сообщения
         /// </summary>
-        private int currentIndex;
+        [JsonPropertyName("count_mess")]
+        protected long CurrentIndex { get; set; }
 
         /// <summary>
         /// Сообщения (часть диалога)
         /// </summary>
+        [JsonPropertyName("messages")]
         public List<Message> Messages { get; set; } = new List<Message>();
 
         /// <summary>
-        /// Максимальное число сообщений
+        /// Максимальное число сообщений в буфере
         /// </summary>
+        [JsonPropertyName("max_mess_in_buffer")]
         public int MaxMess { get; protected set; }
+
+        /// <summary>
+        /// Данные для подкрепления ответа (Индексы)
+        /// </summary>
+        [JsonPropertyName("support_data")]
+        public List<List<int>> SupportDataIds { get; protected set; }
 
         /// <summary>
         /// Часть диалога с ботом
@@ -42,7 +50,7 @@ namespace AI.ChatBotLib.Context
         public void Clear()
         {
             Messages.Clear();
-            currentIndex = 1;
+            CurrentIndex = 1;
         }
 
         /// <summary>
@@ -86,21 +94,27 @@ namespace AI.ChatBotLib.Context
         }
 
         /// <summary>
+        /// Даем подкрепление, которое распространяется обратно по диалогу
+        /// </summary>
+        /// <param name="score">Значение подкрепления</param>
+        public void SetReward(double score = 1) 
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Добавляет сообщение в список
         /// </summary>
-        /// <param name="role"></param>
-        /// <param name="text"></param>
+        /// <param name="role">Роль</param>
+        /// <param name="text">Текст</param>
         private void AddMessage(string role, string text)
         {
-            if (currentIndex >= MaxMess)
+            if (CurrentIndex >= MaxMess)
                 Messages.RemoveAt(0);
             else
-                currentIndex++;
+                CurrentIndex++;
 
             Messages.Add(new Message(role, text));
         }
-
-
-
     }
 }
