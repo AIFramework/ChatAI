@@ -24,7 +24,7 @@ namespace AI.ChatBotLib.Utilites
         /// <param name="minW">Минимальный вес (не 0)</param>
         /// <param name="t">Температура</param>
         /// <exception cref="Exception"></exception>
-        public static string GetAnswerFromIndexes(IEnumerable<QASample> dataQA, Random random, Vector w = null, double minW = 0.01, double t = 0.6) 
+        public static QASample GetAnswerFromIndexes(IEnumerable<QASample> dataQA, Random random, Vector w = null, double minW = 0.01, double t = 0.6) 
         {
             double minLog = Math.Log(minW); // Получение минимального логарифма
             QASample[] data = dataQA.ToArray();
@@ -49,7 +49,7 @@ namespace AI.ChatBotLib.Utilites
 
             probs = ActivationFunctions.Softmax(probs);
 
-            return RandomItemSelection.GetElement(probs, data, random).Answer;
+            return RandomItemSelection.GetElement(probs, data, random);
         }
 
         /// <summary>

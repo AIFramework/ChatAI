@@ -1,11 +1,14 @@
-﻿using AI.ChatBotLib.Context;
+﻿using AI.ChatBotLib.BaseLogic.RetrievalBot;
+using AI.ChatBotLib.Context;
+using AI.ChatBotLib.MainLogic;
 using AI.ChatBotLib.RetrievalBot.BaseLogic.TextRetri;
 using AI.ChatBotLib.Utilites;
 
 Console.Title = "[Chat Bot]";
 
 var searchBot = new NgramJaccardTextSearchBot("data.json");
-BotContext context = new BotContext();
+
+ChatBot bot = new ChatBot(new List<IRetryBot>() { searchBot});
 
 //QAManager.SaveToJson("data.json", searchBot.DataQA);
 
@@ -19,9 +22,7 @@ while (true)
 
     if (textQ == "(К)") break;
     
-    context.AddUserMessage(textQ);
-    string answer = GetAnswer(context);
-    context.AddAssistantMessage(answer);
+    string answer = bot.GetRetriAnswer(textQ);
 
     Console.ForegroundColor = ConsoleColor.Magenta;
     Console.Write("Bot:  ");
@@ -29,8 +30,4 @@ while (true)
     Console.WriteLine(answer);
 
 }
-
-
-string GetAnswer(BotContext context) =>
-    searchBot.GetAnswer(context, 0.7).Answer;
 

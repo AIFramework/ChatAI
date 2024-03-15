@@ -1,4 +1,5 @@
-﻿using AI.ChatBotLib.Context;
+﻿using AI.ChatBotLib.BaseLogic.RetrievalBot;
+using AI.ChatBotLib.Context;
 using AI.ChatBotLib.Utilites;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,13 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
     /// Бот для поиска ответов на базе совпадения слов
     /// </summary>
     [Serializable]
-    public abstract class RetriBot<T>
+    public abstract class RetriBot<T> : IRetryBot
     {
+        /// <summary>
+        /// Порог схожести для выдачи ответа
+        /// </summary>
+        public double SimTreshold { get; set; } = 0.6;
+
         /// <summary>
         /// Когда ответ не найден
         /// </summary>
@@ -68,7 +74,7 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
         /// </summary>
         /// <param name="q">Вопрос</param>
         /// <param name="simTreshold">Порог близости (по умолчанию 0.5)</param>
-        public virtual int GetAnswerIndex(string q, double simTreshold = 0.5)
+        public virtual int GetAnswerIndex(string q)
         {
             T qFeatures = TextTransform(q);
             double maxValue = double.MinValue;
@@ -77,7 +83,7 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
             for (int i = 0; i < Question.Count; i++)
             {
                 double s = SimFunc(qFeatures, Question[i]);
-                if (maxValue < s && s >= simTreshold)
+                if (maxValue < s && s >= SimTreshold)
                 {
                     maxQIndex = i;
                     maxValue = s;
@@ -91,9 +97,9 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
         /// </summary>
         /// <param name="q">Вопрос</param>
         /// <param name="simTreshold">Порог близости (по умолчанию 0.5)</param>
-        public virtual QASample GetAnswer(string q, double simTreshold = 0.5)
+        public virtual QASample GetAnswer(string q)
         {
-            int maxQIndex = GetAnswerIndex(q, simTreshold);
+            int maxQIndex = GetAnswerIndex(q);
             return maxQIndex != -1 ? DataQA[maxQIndex] : NoAnswer;
         }
         /// <summary>
@@ -101,11 +107,11 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
         /// </summary>
         /// <param name="context">Контекст</param>
         /// <param name="simTreshold">Порог близости (по умолчанию 0.5)</param>
-        public virtual QASample GetAnswer(BotContext context, double simTreshold = 0.5) 
+        public virtual QASample GetAnswer(BotContext context) 
         {
             var dim = context.GetContextPart(1);
             string q = dim[0]["text"];
-            return GetAnswer(q, simTreshold);
+            return GetAnswer(q);
         }
     }
 }

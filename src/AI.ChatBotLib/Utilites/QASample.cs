@@ -13,7 +13,7 @@ namespace AI.ChatBotLib.Utilites
         /// Идентификатор QA
         /// </summary>
         [JsonPropertyName("id")]
-        public int ID { get; set; }
+        public int ID { get; set; } = -1;
 
         /// <summary>
         /// Вопрос

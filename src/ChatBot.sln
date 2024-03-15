@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatBot", "ChatBot\ChatBot.csproj", "{215312D9-78C4-4EDE-A653-99E74B90159E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AI.ChatBotLib", "AI.ChatBotLib\AI.ChatBotLib.csproj", "{356CC4E7-0BDC-444F-BED4-A4FB4F00E1B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AI.ChatBotLib", "AI.ChatBotLib\AI.ChatBotLib.csproj", "{71C523BF-5FBC-4F73-A3E1-7CEFCD7C5A5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{215312D9-78C4-4EDE-A653-99E74B90159E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{215312D9-78C4-4EDE-A653-99E74B90159E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{215312D9-78C4-4EDE-A653-99E74B90159E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{356CC4E7-0BDC-444F-BED4-A4FB4F00E1B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{356CC4E7-0BDC-444F-BED4-A4FB4F00E1B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{356CC4E7-0BDC-444F-BED4-A4FB4F00E1B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{356CC4E7-0BDC-444F-BED4-A4FB4F00E1B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71C523BF-5FBC-4F73-A3E1-7CEFCD7C5A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71C523BF-5FBC-4F73-A3E1-7CEFCD7C5A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71C523BF-5FBC-4F73-A3E1-7CEFCD7C5A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71C523BF-5FBC-4F73-A3E1-7CEFCD7C5A5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -32,7 +32,7 @@ namespace AI.ChatBotLib.Context
         /// Данные для подкрепления ответа (Индексы)
         /// </summary>
         [JsonPropertyName("support_data")]
-        public List<List<int>> SupportDataIds { get; protected set; }
+        public List<List<int>> SupportDataIds { get; protected set; } = new List<List<int>>();
 
         /// <summary>
         /// Часть диалога с ботом

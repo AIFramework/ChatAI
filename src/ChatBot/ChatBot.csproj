@@ -11,4 +11,16 @@
     <ProjectReference Include="..\AI.ChatBotLib\AI.ChatBotLib.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="AI">
+      <HintPath>..\..\Binary\AI.dll</HintPath>
+    </Reference>
+    <Reference Include="AI.DataPrepaire">
+      <HintPath>..\..\Binary\AI.DataPrepaire.dll</HintPath>
+    </Reference>
+    <Reference Include="AI.ONNX">
+      <HintPath>..\..\Binary\AI.ONNX.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

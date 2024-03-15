@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="BaseLogic\GenerativeBot\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="AI">
       <HintPath>..\..\Binary\AI.dll</HintPath>
     </Reference>
@@ -18,10 +22,6 @@
     <Reference Include="AI.ONNX">
       <HintPath>..\..\Binary\AI.ONNX.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="BaseLogic\GenerativeBot\" />
   </ItemGroup>
 
 </Project>
