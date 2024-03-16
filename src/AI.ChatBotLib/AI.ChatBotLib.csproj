@@ -9,10 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BaseLogic\GenerativeBot\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="AI">
       <HintPath>..\..\Binary\AI.dll</HintPath>
     </Reference>

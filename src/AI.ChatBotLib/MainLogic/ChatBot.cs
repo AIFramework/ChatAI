@@ -1,4 +1,5 @@
-﻿using AI.ChatBotLib.BaseLogic.RetrievalBot;
+﻿using AI.ChatBotLib.BaseLogic.GenerativeBot;
+using AI.ChatBotLib.BaseLogic.RetrievalBot;
 using AI.ChatBotLib.Context;
 using AI.ChatBotLib.Utilites;
 using AI.DataStructs.Algebraic;
@@ -16,11 +17,15 @@ namespace AI.ChatBotLib.MainLogic
     public class ChatBot
     {
         /// <summary>
+        /// Генеративный чат бот (например ChatGpt, GigaChat или локально запущенные llm) 
+        /// </summary>
+        [JsonIgnore]
+        public IGenerativeBot GBot { get; set; } 
+        /// <summary>
         /// Ретривер-боты
-        /// </summary>      
+        /// </summary>
         [JsonIgnore]
         public List<IRetryBot> RetriBots { get; set; } = new List<IRetryBot>();
-
         /// <summary>
         /// Контекст
         /// </summary>
@@ -31,16 +36,22 @@ namespace AI.ChatBotLib.MainLogic
         /// Чат-бот
         /// </summary>
         /// <param name="retryBots">Ретривер-боты</param>
-        public ChatBot(IEnumerable<IRetryBot> retryBots) 
+        /// <param name="generativeBot">Генеративный чат бот (например ChatGpt, GigaChat или локально запущенные llm)</param>
+        public ChatBot(IEnumerable<IRetryBot> retryBots = null, IGenerativeBot generativeBot = null)
         {
-            RetriBots = retryBots.ToList();
+            if (retryBots != null)
+                RetriBots = retryBots.ToList();
+            else RetriBots = null;
+
+            if(GBot != null)
+                GBot = generativeBot;
         }
 
         /// <summary>
         /// Получение поддерживающих текстов (С добавлением вопроса в контекст)
         /// </summary>
         /// <param name="q">Вопрос</param>
-        public List<QASample> GetSupport(string q) 
+        public List<QASample> GetSupport(string q)
         {
             Context.AddUserMessage(q);
             var dat = GetSupportBase();
@@ -54,7 +65,7 @@ namespace AI.ChatBotLib.MainLogic
         /// Получение случайного примера из найденых
         /// </summary>
         /// <param name="q">Вопрос</param>
-        public QASample GetRandomSampleWithQ(string q) 
+        public QASample GetRandomSampleWithQ(string q)
         {
             Random rnd = new Random();
 
@@ -70,7 +81,7 @@ namespace AI.ChatBotLib.MainLogic
         /// Получение ответа из ретривер бота
         /// </summary>
         /// <param name="q">Вопрос</param>
-        public string GetRetriAnswer(string q) 
+        public string GetRetriAnswer(string q)
         {
             string answer = GetRandomSampleWithQ(q).Answer;
             Context.AddAssistantMessage(answer);
@@ -83,10 +94,20 @@ namespace AI.ChatBotLib.MainLogic
         /// <param name="q">Вопрос</param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public string GetGenerariveAnswer(string q) 
+        public async void GetGenerariveAnswer(string q)
         {
-            throw new NotImplementedException();
+            if (RetriBots != null) GetSupport(q);
+            else Context.AddUserMessage(q);
+
+            string answer = await GBot.GetAnswer(Context);
+            Context.AddAssistantMessage(answer);
+            GenerativeAnswer(answer);
         }
+
+        /// <summary>
+        /// Ответ генеративного бота
+        /// </summary>
+        public event Action<string> GenerativeAnswer;
 
         /// <summary>
         /// Получение поддерживающих текстов (базовый класс)
