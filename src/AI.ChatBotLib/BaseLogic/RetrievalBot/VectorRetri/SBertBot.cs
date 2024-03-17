@@ -28,8 +28,6 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic.VectorRetri
             // Добавление последнего(линейного) слоя
             LinearLayerLoader linearLayer = LinearLayerLoader.LoadFromBinary($@"{pathSbert}\1_Linear\model.aifr");
             _embedder.V2VBlocks.Add(linearLayer);
-
-            LoadData(pathQA);
         }
 
         /// <summary>

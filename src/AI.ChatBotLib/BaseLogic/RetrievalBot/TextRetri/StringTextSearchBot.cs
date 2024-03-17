@@ -15,10 +15,9 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic.TextRetri
         /// <summary>
         /// Простой бот на базе полнотекстового поиска
         /// </summary>
-        /// <param name="path">Путь до файла с вопросами и ответами</param>
-        public StringTextSearchBot(string path)
+        public StringTextSearchBot()
         {
-            LoadData(path);
+            LoadSamples();
         }
 
         /// <summary>

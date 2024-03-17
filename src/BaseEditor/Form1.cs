@@ -13,41 +13,58 @@ namespace BaseEditor
 {
     public partial class Form1 : Form
     {
-        OpenFileDialog openFile = new OpenFileDialog();
-        SaveFileDialog saveFile = new SaveFileDialog();
+        OpenFileDialog _openFile = new OpenFileDialog();
+        SaveFileDialog _saveFile = new SaveFileDialog();
         /// <summary>
         /// Объект, с каким работаем
         /// </summary>
         List<QASample> qASamples = new List<QASample>();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public OpenFileDialog OpenFile
+        {
+            get => _openFile;
+            set => _openFile = value;
+        }
+
+        public SaveFileDialog SaveFile
+        {
+            get => _saveFile;
+            set => _saveFile = value;
+        }
+
         public Form1()
         {
             InitializeComponent();
-            saveFile.Filter = "(JSON)|*.json";
+            _saveFile.Filter = "(JSON)|*.json";
         }
 
-       
-
-        #region Меню
         
 
-        private void openBtn_Click(object sender, EventArgs e)
+
+
+        #region Меню
+        // Открыть файл
+        private void _openBtn_Click(object sender, EventArgs e)
         {
             dataGrid.Rows.Clear();
 
-            if (openFile.ShowDialog() == DialogResult.OK) 
+            if (_openFile.ShowDialog() == DialogResult.OK) 
             {
-                qASamples = QAManager.LoadData(openFile.FileName);
+                qASamples = QAManager.LoadData(_openFile.FileName);
                 QAUtil.AddQASamples(qASamples, dataGrid);
             }
         }
 
-        private void saveBtn_Click(object sender, EventArgs e)
+        // Сохранить файл
+        private void _saveBtn_Click(object sender, EventArgs e)
         {
-            if(saveFile.ShowDialog() == DialogResult.OK) 
+            if(_saveFile.ShowDialog() == DialogResult.OK) 
             {
                 var data = QAUtil.GetData(dataGrid);
-                QAManager.SaveToJson(saveFile.FileName, data);
+                QAManager.SaveToJson(_saveFile.FileName, data);
             }
         }
         #endregion

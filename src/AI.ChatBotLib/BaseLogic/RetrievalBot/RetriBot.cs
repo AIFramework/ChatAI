@@ -1,9 +1,9 @@
 ﻿using AI.ChatBotLib.BaseLogic.RetrievalBot;
 using AI.ChatBotLib.Context;
 using AI.ChatBotLib.Utilites;
+using AI.ChatBotLib.Utilites.QAEnv;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace AI.ChatBotLib.RetrievalBot.BaseLogic
@@ -27,11 +27,11 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
         /// <summary>
         /// Массив вопросов
         /// </summary>
-        protected List<T> Question { get; set; }
+        protected List<QData<T>> Questions { get; set; }
         /// <summary>
         /// Массив список ворос-ответ
         /// </summary>
-        public List<QASample> DataQA { get; set; }
+        public QAEnvironment DataQA { get; set; } = Env.QAData;
         /// <summary>
         /// Метод для опредления сходства текстов
         /// </summary>
@@ -50,24 +50,17 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
         /// Загрузка вопрос ответ из файла
         /// </summary>
         /// <param name="path">Путь до файла</param>
-        public void LoadData(string path)
+        public void LoadSamples()
         {
-            var data = QAManager.LoadData(path);
-            LoadSamples(data);
-        }
-        /// <summary>
-        /// Загрузка вопрос ответ из файла
-        /// </summary>
-        /// <param name="path">Путь до файла</param>
-        public void LoadSamples(IEnumerable<QASample> data)
-        {
-            Question = new List<T>();
+            List<QASample> data = Env.QAData.Registry.Values.ToList();
+            Questions = new List<QData<T>>();
+            
             foreach (QASample sample in data)
-                Question.Add(TextTransform(sample.Question));
-
-            var qa = new QASample[Question.Count];
-            Array.Copy(data.ToArray(), qa, Question.Count);
-            DataQA = qa.ToList();
+            {
+                T features = TextTransform(sample.Question);
+                QData<T> qData = new QData<T>(sample.ID, features);
+                Questions.Add(qData);
+            }
         }
         /// <summary>
         /// Поиск индекса ответа на вопрос
@@ -80,12 +73,12 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
             double maxValue = double.MinValue;
             int maxQIndex = -1;
 
-            for (int i = 0; i < Question.Count; i++)
+            for (int i = 0; i < Questions.Count; i++)
             {
-                double s = SimFunc(qFeatures, Question[i]);
+                double s = SimFunc(qFeatures, Questions[i].Question);
                 if (maxValue < s && s >= SimTreshold)
                 {
-                    maxQIndex = i;
+                    maxQIndex = Questions[i].ID;
                     maxValue = s;
                 }
             }
@@ -100,7 +93,7 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
         public virtual QASample GetAnswer(string q)
         {
             int maxQIndex = GetAnswerIndex(q);
-            return maxQIndex != -1 ? DataQA[maxQIndex] : NoAnswer;
+            return maxQIndex != -1 ? DataQA.Registry[maxQIndex] : NoAnswer;
         }
         /// <summary>
         /// Поиск ответа на вопрос

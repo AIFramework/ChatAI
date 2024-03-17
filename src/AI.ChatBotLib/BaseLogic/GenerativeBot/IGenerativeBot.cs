@@ -12,6 +12,11 @@ namespace AI.ChatBotLib.BaseLogic.GenerativeBot
     public interface IGenerativeBot
     {
         /// <summary>
+        /// Часть контекста
+        /// </summary>
+        int ContextPart { get; set; }
+
+        /// <summary>
         /// Ответ на вопрос
         /// </summary>
         /// <param name="context"></param>

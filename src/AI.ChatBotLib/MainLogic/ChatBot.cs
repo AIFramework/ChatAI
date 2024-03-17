@@ -43,7 +43,7 @@ namespace AI.ChatBotLib.MainLogic
                 RetriBots = retryBots.ToList();
             else RetriBots = null;
 
-            if(GBot != null)
+            if(generativeBot != null)
                 GBot = generativeBot;
         }
 

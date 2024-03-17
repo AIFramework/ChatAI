@@ -18,6 +18,9 @@
     <Reference Include="AI.ONNX">
       <HintPath>..\..\Binary\AI.ONNX.dll</HintPath>
     </Reference>
+    <Reference Include="FractalGPT.SharpGPTLib">
+      <HintPath>..\..\Binary\FractalGPT.SharpGPTLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

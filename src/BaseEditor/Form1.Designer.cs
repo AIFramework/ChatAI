@@ -80,14 +80,14 @@
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(180, 22);
             this.openBtn.Text = "Открыть";
-            this.openBtn.Click += new System.EventHandler(this.openBtn_Click);
+            this.openBtn.Click += new System.EventHandler(this._openBtn_Click);
             // 
             // saveBtn
             // 
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(180, 22);
             this.saveBtn.Text = "Сохранить";
-            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
+            this.saveBtn.Click += new System.EventHandler(this._saveBtn_Click);
             // 
             // idCol
             // 

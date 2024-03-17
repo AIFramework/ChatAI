@@ -20,13 +20,13 @@ namespace AI.ChatBotLib.Utilites.QAEnv
         /// Песочница
         /// </summary>
         [JsonPropertyName("sandbox")]
-        public HashSet<int> SandBox { get; protected set; }
+        public HashSet<int> SandBox { get; protected set; } = new HashSet<int>();
 
         /// <summary>
         /// Основная часть
         /// </summary>
         [JsonPropertyName("main")]
-        public HashSet<int> MainPart { get; protected set; }
+        public HashSet<int> MainPart { get; protected set; } = new HashSet<int>();
 
         /// <summary>
         /// Добавление QA
@@ -36,6 +36,8 @@ namespace AI.ChatBotLib.Utilites.QAEnv
         {
             if(sample.ID == -1)
                 sample.ID = Registry.Count;
+            
+            SandBox.Add(sample.ID);
             Registry.Add(sample.ID, sample);
         }
 
@@ -108,7 +110,6 @@ namespace AI.ChatBotLib.Utilites.QAEnv
 
             for (int i = 0; i < qaMax; i++)
                 MainPart.Add(data[i].ID);
-
         }
     }
 }

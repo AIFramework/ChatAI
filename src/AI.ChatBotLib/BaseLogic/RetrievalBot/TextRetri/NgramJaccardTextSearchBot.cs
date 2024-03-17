@@ -30,17 +30,16 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic.TextRetri
         /// <summary>
         /// Бот на базе сравнения N-грамм текстов с использованием коэффициента Жаккарда
         /// </summary>
-        /// <param name="path">Путь до файла с вопросами и ответами</param>
         /// <param name="nGSize">Размер n-граммы</param>
         /// <param name="spaceDel">Удалять ли пробелы и переносы</param>
         /// <param name="pDel">Удалять ли знаки пунктуации</param>
-        public NgramJaccardTextSearchBot(string path, int nGSize = 2, bool spaceDel = true, bool pDel = true)
+        public NgramJaccardTextSearchBot(int nGSize = 2, bool spaceDel = true, bool pDel = true)
         {
             NGrammSize = nGSize;
             SpaceDel = spaceDel;
             PDel = pDel;
-            LoadData(path);
             PDel = pDel;
+            LoadSamples();
         }
 
         /// <summary>
