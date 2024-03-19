@@ -8,9 +8,18 @@ using System.Windows.Forms;
 
 namespace BaseEditor
 {
-    public static class QAUtil
+    public class QAUtil
     {
-        public static void AddQASample(QASample qASample, DataGridView dataGridView)
+        public DataGridView DataView { get; set; }
+
+        public QAUtil(DataGridView dataGridView) 
+        {
+            DataView = dataGridView;
+            DataView.RowsAdded += DataView_RowsAdded;
+            CreateDefaultLast();
+        }
+
+        public void AddQASample(QASample qASample)
         {
             int id = qASample.ID;
             string q = qASample.Question;
@@ -18,15 +27,31 @@ namespace BaseEditor
             double reward = qASample.Reward;
             int count = qASample.Count;
 
-            dataGridView.Rows.Add(new object[] { id, q, a, reward, count});
+            DataView.Rows.Add(new object[] { id, q, a, reward, count});
         }
 
-        public static void AddQASamples(IEnumerable<QASample> qASamples, DataGridView dataGridView)
+        public void AddQASamples(IEnumerable<QASample> qASamples)
         {
             foreach (var item in qASamples)
-                AddQASample(item, dataGridView);
+                AddQASample(item);
             
         }
+
+        public List<QASample> GetData()
+        {
+            List<QASample> qASamples = new List<QASample>();
+            int num = 0;
+
+            foreach (DataGridViewRow item in DataView.Rows)
+            {
+                num++;
+                if(DataView.Rows.Count > num)
+                    qASamples.Add(Row2QAData(item.Cells));
+            }
+
+            return qASamples;
+        }
+
 
         public static QASample Row2QAData(DataGridViewCellCollection dataRow)
         {
@@ -43,18 +68,16 @@ namespace BaseEditor
             return sample;
         }
 
-        public static List<QASample> GetData(DataGridView dataGridView)
+        // Добавление параметров строки по умолчанию
+        private void DataView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            List<QASample> qASamples = new List<QASample>();
-
-            foreach (DataGridViewRow item in dataGridView.Rows)
-                if (item.Cells[0].Value != null)
-                    qASamples.Add(Row2QAData(item.Cells));
-
-            return qASamples;
+            CreateDefaultLast();
         }
 
+        private void CreateDefaultLast() 
+        {
+            DataView.Rows[DataView.Rows.Count - 1].SetValues(new object[] { -1, "", "", 0, 0 });
+        }
 
-       
     }
 }

@@ -81,7 +81,7 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic.TextRetri
 
         //Коэффициент Жаккара нормированный на длинну вопроса
         private double JaccardCoefficientQ(HashSet<string> set1, HashSet<string> set2) =>
-            set1.Intersect(set2).Count()/ set1.Count;
+            set1.Intersect(set2).Count()/ (set1.Count+1e-6);
          
     }
 

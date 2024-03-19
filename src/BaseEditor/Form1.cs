@@ -35,10 +35,14 @@ namespace BaseEditor
             set => _saveFile = value;
         }
 
+
+        QAUtil utilData;
+
         public Form1()
         {
             InitializeComponent();
             _saveFile.Filter = "(JSON)|*.json";
+            utilData = new QAUtil(dataGrid);
         }
 
         
@@ -54,7 +58,7 @@ namespace BaseEditor
             if (_openFile.ShowDialog() == DialogResult.OK) 
             {
                 qASamples = QAManager.LoadData(_openFile.FileName);
-                QAUtil.AddQASamples(qASamples, dataGrid);
+                utilData.AddQASamples(qASamples);
             }
         }
 
@@ -63,10 +67,11 @@ namespace BaseEditor
         {
             if(_saveFile.ShowDialog() == DialogResult.OK) 
             {
-                var data = QAUtil.GetData(dataGrid);
+                var data = utilData.GetData();
                 QAManager.SaveToJson(_saveFile.FileName, data);
             }
         }
         #endregion
+
     }
 }

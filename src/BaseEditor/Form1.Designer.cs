@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.dataGrid = new System.Windows.Forms.DataGridView();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileBtn = new System.Windows.Forms.ToolStripMenuItem();
-            this.openBtn = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.idCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Q = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.A = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rew = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countRew = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.openBtn = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveBtn = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,39 +55,6 @@
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.Size = new System.Drawing.Size(775, 400);
             this.dataGrid.TabIndex = 0;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileBtn});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileBtn
-            // 
-            this.fileBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openBtn,
-            this.saveBtn});
-            this.fileBtn.Name = "fileBtn";
-            this.fileBtn.Size = new System.Drawing.Size(48, 20);
-            this.fileBtn.Text = "Файл";
-            // 
-            // openBtn
-            // 
-            this.openBtn.Name = "openBtn";
-            this.openBtn.Size = new System.Drawing.Size(180, 22);
-            this.openBtn.Text = "Открыть";
-            this.openBtn.Click += new System.EventHandler(this._openBtn_Click);
-            // 
-            // saveBtn
-            // 
-            this.saveBtn.Name = "saveBtn";
-            this.saveBtn.Size = new System.Drawing.Size(180, 22);
-            this.saveBtn.Text = "Сохранить";
-            this.saveBtn.Click += new System.EventHandler(this._saveBtn_Click);
             // 
             // idCol
             // 
@@ -113,6 +80,39 @@
             // 
             this.countRew.HeaderText = "Число оценок";
             this.countRew.Name = "countRew";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileBtn});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileBtn
+            // 
+            this.fileBtn.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openBtn,
+            this.saveBtn});
+            this.fileBtn.Name = "fileBtn";
+            this.fileBtn.Size = new System.Drawing.Size(48, 20);
+            this.fileBtn.Text = "Файл";
+            // 
+            // openBtn
+            // 
+            this.openBtn.Name = "openBtn";
+            this.openBtn.Size = new System.Drawing.Size(133, 22);
+            this.openBtn.Text = "Открыть";
+            this.openBtn.Click += new System.EventHandler(this._openBtn_Click);
+            // 
+            // saveBtn
+            // 
+            this.saveBtn.Name = "saveBtn";
+            this.saveBtn.Size = new System.Drawing.Size(133, 22);
+            this.saveBtn.Text = "Сохранить";
+            this.saveBtn.Click += new System.EventHandler(this._saveBtn_Click);
             // 
             // Form1
             // 
