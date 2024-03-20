@@ -36,7 +36,7 @@ namespace AI.ChatBotLib.BaseLogic.GenerativeBot
         /// <summary>
         /// Локальный бот решает задачу (PersonaChat)
         /// </summary>
-        public PersonaLocalBot(string host, string startConv = Env.StartConvFREDT5) 
+        public PersonaLocalBot(string host, string startConv = Settings.StartConvFREDT5) 
         {
             _baseAPI = new BaseLLMServerAPI(host);
             PersonaChat personaChat = new PersonaChat() 
@@ -79,7 +79,7 @@ namespace AI.ChatBotLib.BaseLogic.GenerativeBot
             List<string> strings = new List<string>();
 
             foreach (var id in ids)
-                if(id >= 0) strings.Add(Env.QAData.Registry[id].Answer);
+                if(id >= 0) strings.Add(Settings.QAData.Registry[id].Answer);
 
             return strings;
         }

@@ -31,7 +31,7 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
         /// <summary>
         /// Массив список ворос-ответ
         /// </summary>
-        public QAEnvironment DataQA { get; set; } = Env.QAData;
+        public QAEnvironment DataQA { get; set; } = Settings.QAData;
         /// <summary>
         /// Метод для опредления сходства текстов
         /// </summary>
@@ -52,7 +52,7 @@ namespace AI.ChatBotLib.RetrievalBot.BaseLogic
         /// <param name="path">Путь до файла</param>
         public void LoadSamples()
         {
-            List<QASample> data = Env.QAData.Registry.Values.ToList();
+            List<QASample> data = Settings.QAData.Registry.Values.ToList();
             Questions = new List<QData<T>>();
             
             foreach (QASample sample in data)

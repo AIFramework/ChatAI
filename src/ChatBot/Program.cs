@@ -6,7 +6,7 @@ using AI.ChatBotLib.RetrievalBot.BaseLogic.TextRetri;
 
 Console.Title = "[Chat Bot]";
 
-Env.Load("3.json");
+Settings.Load("3.json");
 var searchBot = new NgramJaccardTextSearchBot();
 
 PersonaLocalBot personaLocalBot = new PersonaLocalBot("http://192.168.0.101:8080/");
