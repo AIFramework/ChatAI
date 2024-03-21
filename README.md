@@ -27,3 +27,8 @@
 ## Начало работы:
 
 Разработчики, заинтересованные в участии в проекте или использовании **ChatAI**, могут клонировать репозиторий и изучить доступную документацию на страницах проекта на GitHub для [FractalGPT.SharpGPT](https://github.com/FractalGPT/SharpGPT), [SimpleLLMServer](https://github.com/FractalGPT/SimpleLLMServer) и [AIFramework версия 2.2 Open](https://github.com/AIFramework/AIFrameworkOpen). Проект разработан таким образом, чтобы быть гибким, позволяя легко интегрироваться с существующими системами или использоваться как самостоятельное решение для агентов ведения бесед.
+
+
+---
+# Лицензия
+* **[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0)**
