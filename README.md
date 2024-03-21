@@ -1,5 +1,10 @@
+<img src="https://github.com/AIFramework/ChatAI/blob/main/img/Logo%20Bot%20C.png?raw=true" width=450 />
+
 # ChatAI
 
+![Stars](https://img.shields.io/github/stars/AIFramework/ChatAI?style=flat-square)
+![Forks](https://img.shields.io/github/forks/AIFramework/ChatAI?style=flat-square)
+![Watchers](https://img.shields.io/github/watchers/AIFramework/ChatAI?style=flat-square)
 
 Проект ChatAI представляет собой инновационную платформу для создания чат-ботов, которая позволяет интегрировать несколько ботов на основе алгоритмов поиска (ретривер-ботов) с генеративными моделями, включая локально запущенные модели и модели, основанные на ChatGPT. Эта инициатива с открытым исходным кодом от "ООО ФракталТех" использует передовые возможности проектов, таких как [FractalGPT.SharpGPT](https://github.com/FractalGPT/SharpGPT), [SimpleLLMServer](https://github.com/FractalGPT/SimpleLLMServer) и [AIFramework версия 2.2 Open](https://github.com/AIFramework/AIFrameworkOpen), предлагая универсальное и масштабируемое решение для создания интеллектуальных агентов для ведения бесед.
 
