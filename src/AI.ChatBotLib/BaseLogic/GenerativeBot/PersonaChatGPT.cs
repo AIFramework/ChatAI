@@ -74,7 +74,7 @@ namespace AI.ChatBotLib.BaseLogic.GenerativeBot
         {
             StringBuilder sb = new StringBuilder();
             string append = facts.Count > BaseFacts.Count ? "Answer questions based only on context and facts about yourself" : "";
-            sb.Append($"Give short and concise answers. {append}. Here are some facts about you:\n");
+            sb.Append($"Give short and concise answers. {append}. Don't hallucinate. Here are some facts about you:\n");
 
             foreach (var fact in facts)
             { 
