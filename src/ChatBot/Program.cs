@@ -6,12 +6,13 @@ using AI.ChatBotLib.RetrievalBot.BaseLogic.TextRetri;
 
 Console.Title = "[Chat Bot]";
 
-Settings.Load("3.json");
+Settings.Load("data.json");
 var searchBot = new NgramJaccardTextSearchBot();
 
-PersonaLocalBot personaLocalBot = new PersonaLocalBot("http://192.168.0.101:8080/");
-personaLocalBot.BaseFacts = new List<string>() { "Я дружелюбный помощник." };
-ChatBot bot = new ChatBot(new List<IRetryBot>() { searchBot }, personaLocalBot);
+//PersonaLocalBot GBot = new PersonaLocalBot("http://192.168.0.101:8080/");
+PersonaChatGPT GBot = new PersonaChatGPT(File.ReadAllText("key.txt"), proxyPath:"proxy.json");
+GBot.BaseFacts = new List<string>() { "Я дружелюбный помощник." };
+ChatBot bot = new ChatBot(new List<IRetryBot>() { searchBot }, GBot);
 bot.GenerativeAnswer += Bot_GenerativeAnswer;
 
 

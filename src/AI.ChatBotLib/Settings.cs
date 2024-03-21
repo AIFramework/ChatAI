@@ -50,10 +50,13 @@ namespace AI.ChatBotLib
         [JsonPropertyName("openai_key")]
         public string OpenAIApi { get; set; }
         /// <summary>
-        /// 
+        /// Ключ апи от проекта Fractal Gpt
         /// </summary>
         [JsonPropertyName("fractal_gpt_key")]
         public string FractalGPTApi { get; set; }
+        /// <summary>
+        /// Путь до файла с набором прокси
+        /// </summary>
         [JsonPropertyName("proxy_path")]
         public static string ProxyPath { get; set; }
     }
