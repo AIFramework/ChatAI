@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AI.ChatBotLib", "AI.ChatBot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseEditor", "BaseEditor\BaseEditor.csproj", "{CB7D8AF7-9D6F-4C4D-ACD0-EE5F005D5C4A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FractalGPT.GUI", "FractalGPT.GUI\FractalGPT.GUI.csproj", "{73B16A4C-E790-4F2B-92B6-E7CA89BEF958}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{CB7D8AF7-9D6F-4C4D-ACD0-EE5F005D5C4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB7D8AF7-9D6F-4C4D-ACD0-EE5F005D5C4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB7D8AF7-9D6F-4C4D-ACD0-EE5F005D5C4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B16A4C-E790-4F2B-92B6-E7CA89BEF958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B16A4C-E790-4F2B-92B6-E7CA89BEF958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B16A4C-E790-4F2B-92B6-E7CA89BEF958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B16A4C-E790-4F2B-92B6-E7CA89BEF958}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
